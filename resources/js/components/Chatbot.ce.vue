@@ -68,8 +68,8 @@ export default {
             this.input = ''
             this.sending = true
 
-            const assistantMessage = { role: 'assistant', content: '' }
-            this.messages.push(assistantMessage)
+            this.messages.push({ role: 'assistant', content: '' })
+            const assistantIndex = this.messages.length - 1
 
             try {
                 const response = await fetch(this.routes.send, {
@@ -89,7 +89,7 @@ export default {
                     throw new Error(this.labels?.errorMessage || 'Something went wrong. Please try again.')
                 }
 
-                await this.consumeStream(response.body, assistantMessage)
+                await this.consumeStream(response.body, assistantIndex)
             } catch (err) {
                 this.error = err.message || this.labels?.errorMessage || 'Something went wrong. Please try again.'
                 this.messages.pop()
@@ -99,7 +99,10 @@ export default {
             }
         },
 
-        async consumeStream(body, assistantMessage) {
+        // Mutate through this.messages[index], not a captured object reference:
+        // a plain object reference captured before Vue wraps it in the reactive
+        // array proxy doesn't trigger re-renders on mutation.
+        async consumeStream(body, assistantIndex) {
             const reader = body.getReader()
             const decoder = new TextDecoder()
             let buffer = ''
@@ -119,7 +122,7 @@ export default {
                     const event = JSON.parse(raw)
 
                     if (event.type === 'text_delta') {
-                        assistantMessage.content += event.delta
+                        this.messages[assistantIndex].content += event.delta
                         this.scrollToBottom()
                     } else if (event.type === 'conversation') {
                         this.conversationId = event.conversation_id
