@@ -9,7 +9,7 @@
             :routes="{
                 'send': 'http://chatbot.test/volet/chatbot/messages',
             }"
-            csrf-token="dev-csrf-token"
+            token="dev-csrf-token"
         />
     </div>
 </template>

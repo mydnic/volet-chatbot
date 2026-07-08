@@ -39,7 +39,12 @@ export default {
             type: Object,
             default: () => ({}),
         },
-        csrfToken: {
+        // Single word, not "csrfToken": Volet's feature host sets string
+        // config values via el.setAttribute(key, value), which the DOM
+        // lowercases. Vue's custom-element attributeChangedCallback camelizes
+        // it back, so a multi-word camelCase name never round-trips and the
+        // prop stays undefined.
+        token: {
             type: String,
             required: true,
         },
@@ -72,7 +77,7 @@ export default {
                     headers: {
                         'Content-Type': 'application/json',
                         Accept: 'text/event-stream',
-                        'X-CSRF-TOKEN': this.csrfToken,
+                        'X-CSRF-TOKEN': this.token,
                     },
                     body: JSON.stringify({
                         message: content,

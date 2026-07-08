@@ -40,7 +40,7 @@ class VoletChatbot extends BaseFeature
                 'send' => route('volet.chatbot.messages.store'),
             ],
             'labels' => trans('volet-chatbot::volet-chatbot'),
-            'csrfToken' => csrf_token(),
+            'token' => csrf_token(),
         ];
     }
 }
