@@ -10,7 +10,7 @@ Built on Laravel's official [`laravel/ai`](https://github.com/laravel/ai) packag
 composer require mydnic/volet-chatbot
 ```
 
-Publish `laravel/ai`'s config and migrations (conversation history lives in its `agent_conversations` / `agent_conversation_messages` tables — this package does not add its own):
+Publish `laravel/ai`'s config and migrations (conversation history lives in its `agent_conversations` / `agent_conversation_messages` tables : this package does not add its own):
 
 ```bash
 php artisan vendor:publish --provider="Laravel\Ai\AiServiceProvider"
@@ -58,7 +58,7 @@ $volet->register(
 );
 ```
 
-## Extending the agent — tools, MCP, structured output
+## Extending the agent - tools, MCP, structured output
 
 The widget's replies are produced by `config('volet-chatbot.agent')`, which defaults to `Mydnic\VoletChatbot\Agents\ChatbotAgent`. To add tools, MCP servers, provider failover, or anything else `laravel/ai` supports, don't modify this package. Extend the agent in your own app and point the config at it:
 
