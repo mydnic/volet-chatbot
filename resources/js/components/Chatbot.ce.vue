@@ -17,21 +17,23 @@
         </div>
 
         <form class="vc-form" @submit.prevent="sendMessage">
-            <textarea
-                ref="inputEl"
-                v-model="input"
-                class="vc-input"
-                rows="1"
-                :placeholder="labels?.inputPlaceholder || 'Message...'"
-                :disabled="sending"
-                @keydown.enter.exact.prevent="sendMessage"
-                @input="autoGrow"
-            ></textarea>
-            <button type="submit" class="vc-send" :disabled="sending || !input.trim()" :aria-label="labels?.send || 'Send'">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                </svg>
-            </button>
+            <div class="vc-input-wrap">
+                <textarea
+                    ref="inputEl"
+                    v-model="input"
+                    class="vc-input"
+                    rows="1"
+                    :placeholder="labels?.inputPlaceholder || 'Message...'"
+                    :disabled="sending"
+                    @keydown.enter.exact.prevent="sendMessage"
+                    @input="autoGrow"
+                ></textarea>
+                <button type="submit" class="vc-send" :disabled="sending || !input.trim()" :aria-label="labels?.send || 'Send'">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
         </form>
     </div>
 </template>
