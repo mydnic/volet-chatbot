@@ -5,7 +5,7 @@
    CSS variable the panel itself uses, instead of depending on that chain. */
 :host {
     display: block;
-    height: var(--volet-panel-height, 360px);
+    height: calc(var(--volet-panel-height,360px) - 2rem);
 }
 
 .volet-chatbot {
