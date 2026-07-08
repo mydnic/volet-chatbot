@@ -1,3 +1,13 @@
+/* Custom elements default to display:inline with no height. Everything
+   between Volet's fixed-height ".volet-panel-content" and our shadow root
+   is a plain auto-height wrapper div, so height:100% on .volet-chatbot has
+   nothing definite to resolve against. Size the host directly off the same
+   CSS variable the panel itself uses, instead of depending on that chain. */
+:host {
+    display: block;
+    height: var(--volet-panel-height, 360px);
+}
+
 .volet-chatbot {
     display: flex;
     flex-direction: column;
