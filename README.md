@@ -26,19 +26,27 @@ php artisan vendor:publish --tag="volet-chatbot-config"
 
 ## Configuration
 
-In `config/ai.php`, point the `openai-compatible` provider at your endpoint (or use OpenAI directly via the `openai` provider):
+By default this package uses `config('ai.php')`'s `openai` provider, which talks to OpenAI directly:
 
 ```dotenv
-OPENAI_COMPATIBLE_URL=https://your-backend.test/v1
-OPENAI_COMPATIBLE_API_KEY=sk-...
+OPENAI_API_KEY=sk-...
+```
+
+To point it at your own backend (or any other OpenAI-compatible endpoint) instead, override `OPENAI_URL` — no code change needed, `openai` is just an HTTP client pointed at a base URL:
+
+```dotenv
+OPENAI_URL=https://your-backend.test/v1
+OPENAI_API_KEY=sk-...
 ```
 
 The API key only ever lives server-side in this config. It is never sent to the widget's JavaScript.
 
+(Some versions of `laravel/ai` also ship a separate `openai-compatible` provider entry in `config/ai.php` for this — check your installed version if you'd rather use that instead of overriding `openai`'s URL. Either way works the same; this package defaults to `openai` since that entry is guaranteed to exist across versions.)
+
 In `config/volet-chatbot.php`, set the provider/model/system prompt and the request rate limit:
 
 ```php
-'provider' => env('VOLET_CHATBOT_PROVIDER', 'openai-compatible'),
+'provider' => env('VOLET_CHATBOT_PROVIDER', 'openai'),
 'model' => env('VOLET_CHATBOT_MODEL', 'gpt-4o-mini'),
 'system_prompt' => env('VOLET_CHATBOT_SYSTEM_PROMPT', 'You are a helpful assistant.'),
 ```

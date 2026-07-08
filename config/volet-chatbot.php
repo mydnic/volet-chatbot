@@ -9,12 +9,11 @@ return [
     // docs, nothing chatbot-specific is needed for that.
     'agent' => ChatbotAgent::class,
 
-    // Which entry in config('ai.php')'s "providers" array to use. The
-    // "openai-compatible" driver accepts any OpenAI-compatible endpoint via
-    // OPENAI_COMPATIBLE_URL / OPENAI_COMPATIBLE_API_KEY — including your own
-    // Laravel app's backend, or OpenAI directly (use the "openai" provider
-    // for that instead).
-    'provider' => env('VOLET_CHATBOT_PROVIDER', 'openai-compatible'),
+    // Which entry in config('ai.php')'s "providers" array to use. Defaults
+    // to "openai", which talks to OpenAI's own API — override OPENAI_URL in
+    // your .env to point it at any other OpenAI-compatible endpoint instead
+    // (your own Laravel app's backend, a self-hosted model, etc).
+    'provider' => env('VOLET_CHATBOT_PROVIDER', 'openai'),
 
     'model' => env('VOLET_CHATBOT_MODEL', 'gpt-4o-mini'),
 
