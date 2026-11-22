@@ -18,7 +18,7 @@ class VoletChatbot extends BaseFeature
 
     public function getIcon(): string
     {
-        return 'https://api.iconify.design/lucide:message-circle.svg?color=%23888888';
+        return 'https://api.iconify.design/lucide/message-circle.svg?color=%23888888';
     }
 
     public function getComponentName(): ?string
